@@ -1,0 +1,2 @@
+C:\Users\AHMECEBI\Source\Repos\chatbody\obj\Debug\chatbody.njsprojResolveAssemblyReference.cache
+C:\Users\AHMECEBI\Source\Repos\chatbody\bin\Microsoft.NodejsTools.WebRole.dll
