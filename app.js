@@ -2,18 +2,18 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
-var http = require('http');
+//var http = require('http');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-const SocketHelper  = require('./core/connectionHelper/SocketHelper.js');
+//var SocketHelper = require('./core/connectionHelper/SocketHelper.js');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
-
+//var server = http.createServer(app);
 // view engine setup
-app.set('port', process.env.PORT || 3000);
+app.set('port',3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
@@ -59,8 +59,8 @@ app.use(function(err, req, res, next) {
   });
 });
 
-var server = http.createServer(app);
-const sc = new SocketHelper(server);
+
+//const sc = new SocketHelper(server);
 
 module.exports = app;
 
