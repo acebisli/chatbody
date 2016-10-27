@@ -5,12 +5,13 @@ var Rooms = [];
 var numUsers = 0;
 
 function SocketHelper(server) {
-    this.io = require('socket.io')(server);
+    this.io = require('socket.io').listen(server);
     this.io.on('connection', this.onConnection);
+    console.log("connection socket ctor");
 }
 
 SocketHelper.prototype.onConnection = function (client) {
-    
+    console.log("connection socket");
     var addedUser = false;
     
     client.on('new message', function (s) {
@@ -74,4 +75,4 @@ SocketHelper.prototype.onConnection = function (client) {
     });
 
 
-}
+};
