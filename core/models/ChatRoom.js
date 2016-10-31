@@ -6,11 +6,16 @@ function chatRoom()
 {
     this._roomName='';
     this._roomId='';
-    this._roomDesc='';
+    this._roomDesc = '';
+    this._roomUsers = [];
+    this._status = 'available'
+    this._isPublic = true;
 }
 
-chatRoom.prototype.loadDefRooms= function () {
+chatRoom.prototype.addPerson= function () {
+    if (this.status == "available" && this._isPublic) {
 
+    }
 };
 
 module.exports=chatRoom;

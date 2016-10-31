@@ -3,6 +3,10 @@ var chatUser = require('../models/ChatUser');
 var chatMessage = require('../models/ChatMessage');
 var chatRoom = require('../models/ChatRoom');
 
+//for helper methods
+var _ = require('underscore');
+
+
 module.exports = SocketHelper;
 
 var Rooms = [];
@@ -23,7 +27,7 @@ SocketHelper.prototype.onConnection = function (client) {
     var r1 = new chatRoom();
     r1._roomId = 1;
     r1._roomName = 'Ankara';
-    r1._roomDesc='Ankara"nın bağları';
+    r1._roomDesc = 'Ankara"nın bağları';
     rooms.push(r1);
     r1 = new chatRoom();
     r1._roomId = 2;
@@ -41,19 +45,20 @@ SocketHelper.prototype.onConnection = function (client) {
 
     client.on('new message', function (s) {
         var _user = new chatUser();
+
         _user._userId = client.id;
-        _user._userName = 'cabbar';
+        _user._userName = s._user._userName;
 
-        var _chatMsg = new chatMessage(_user, s);
-
+        var _chatMsg = new chatMessage(_user, s._message);
+        _chatMsg._messageTime = '12:10 am';
         client.broadcast.emit('new message', _chatMsg);
     });
     // when the client emits 'add user', this listens and executes
-    client.on('add user', function (username) {
+    client.on('add user', function (data) {
         if (addedUser) return;
 
         // we store the username in the socket session for this client
-        client.username = username;
+        client.username = data.username;
         ++numUsers;
         addedUser = true;
         client.emit('login', {
@@ -80,11 +85,17 @@ SocketHelper.prototype.onConnection = function (client) {
     });
 
     client.on('add room', function (model) {
-        User.find({name: model.name}, function (err, rooms) {
-            if (err) throw err;
-            else {
-                client.broadcast.emit('add room', {hasRoom: true});
-            }
-        })
+        var hasRoom = _.find(rooms, function (item) {
+            return item._roomName == model._roomName;
+        });
+        if (!hasRoom) {
+            var willbeAddedRoom = new chatRoom();
+            willbeAddedRoom._roomId = model._roomId;
+            willbeAddedRoom._roomName = model._roomName;
+            willbeAddedRoom._roomDesc = model._roomDesc;
+            rooms.push(willbeAddedRoom);
+
+            client.emit('added room', willbeAddedRoom);
+        }
     });
 };

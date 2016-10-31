@@ -3,14 +3,14 @@
  */
 'use strict';
 
-function chatMessage(userInfo,msg)
-{
-    this.user=userInfo;
-    this.message=msg;
+function chatMessage(userInfo, msg) {
+    this._user = userInfo;
+    this._message = msg;
+    this._messageTime = '';
 }
 
-chatMessage.prototype.getUserId= function () {
-    return this.user._userId;
+chatMessage.prototype.getUserId = function () {
+    return this._user;
 }
 
-module.exports=chatMessage;
+module.exports = chatMessage;

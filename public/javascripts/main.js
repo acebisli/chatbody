@@ -2,19 +2,20 @@
  * Created by acebisli on 27/10/16.
  */
 $(function () {
+    
     var FADE_TIME = 150; // ms
-
+    
     // Initialize variables
     var $window = $(window);
     var $messages = $('.messages'); // Messages area
     var $inputMessage = $('#txtMessage'); // Input message input box
-
+    
     // Prompt for setting a username
     var username = 'cabbar';
     var connected = false;
-
+    
     var socket = io();
-
+    
     if (socket) {
         connected = true;
         // Display the welcome message
@@ -22,11 +23,28 @@ $(function () {
         log(message, {
             prepend: true
         });
-
-
-        addParticipantsMessage({numUsers: 1});
+        getUserName();
+        if (username && username != "") {
+            var connectedUser = {
+                id: socket.id,
+                username: username
+            };
+            setUsername(connectedUser);
+            addParticipantsMessage({ numUsers: 1 });
+        }
     }
-
+    
+    function getUserName() {
+        var person = prompt("İsminizi Giriniz");
+        if (person != null && person != "") {
+            username = person;
+            return username;
+        } else {
+            getUserName();
+        }
+    }
+    
+    
     function addParticipantsMessage(data) {
         var message = '';
         if (data.numUsers === 1) {
@@ -34,14 +52,15 @@ $(function () {
         } else {
             message += "there are " + data.numUsers + " participants";
         }
+        message += "Connected User => " + data.username;
         log(message);
     }
-
+    
     // Sets the client's username
-    function setUsername() {
-        socket.emit('add user', 'cabbar');
+    function setUsername(user) {
+        socket.emit('add user', username);
     }
-
+    
     // Sends a chat message
     function sendMessage() {
         var message = $inputMessage.val();
@@ -50,90 +69,61 @@ $(function () {
         // if there is a non-empty message and a socket connection
         if (message && connected) {
             $inputMessage.val('');
-            addChatMessage({
-                username: username,
-                message: message
-            });
+            var msgObj = {
+                _user: {
+                    _userId: 'asda',
+                    _userName: username
+                },
+                _message: message,
+                _messageTime: '12:25 am'
+            };
+            
+            addChatMessage(msgObj);
             // tell server to execute 'new message' and send along one parameter
-            socket.emit('new message', message);
+            socket.emit('new message', msgObj);
         }
     }
-
+    
     // Log a message
     function log(message, options) {
-        var $el = $('<li>').addClass('log').text(message);
-        addMessageElement($el, options);
+        console.log(message);
     }
-
+    
     // Adds the visual chat message to the message list
-    function addChatMessage(data, options) {
-        var $usernameDiv = $('<span class="username"/>')
-            .text(data.username);
-        var $messageBodyDiv = $('<span class="messageBody">')
-            .text(data.message);
-
-        var $messageDiv = $('<li class="message"/>')
-            .data('username', data.username)
-            .append($usernameDiv, $messageBodyDiv);
-
-        addMessageElement($messageDiv, options);
+    function addChatMessage(data) {
+        var tempHtml = _.template($("#msgBody").html());
+        $('.msg-wrap').append(tempHtml(data));
     }
-
-    // Adds a message element to the messages and scrolls to the bottom
-    // el - The element to add as a message
-    // options.fade - If the element should fade-in (default = true)
-    // options.prepend - If the element should prepend
-    //   all other messages (default = false)
-    function addMessageElement(el, options) {
-        var $el = $(el);
-
-        // Setup default options
-        if (!options) {
-            options = {};
-        }
-        if (typeof options.fade === 'undefined') {
-            options.fade = true;
-        }
-        if (typeof options.prepend === 'undefined') {
-            options.prepend = false;
-        }
-
-        // Apply options
-        if (options.fade) {
-            $el.hide().fadeIn(FADE_TIME);
-        }
-        if (options.prepend) {
-            $messages.prepend($el);
-        } else {
-            $messages.append($el);
-        }
-        $messages[0].scrollTop = $messages[0].scrollHeight;
-    }
-
+    
     // Prevents input from having injected markup
     function cleanInput(input) {
-        var strTemp = "<div class='media msg'>" + input + "</div>";
-        $(".messages").append(strTemp);
+        $inputMessage.val('');
     }
-
-
+    
+    function addRoom(data) {
+        var tempHtml = _.template($("#roomTemplate").html());
+        $('.conversation-wrap').append(tempHtml({ rooms : data.allRooms }));
+    }
+    
+    
     $window.keydown(function (event) {
         if (event.which === 13 || event.which == 8) {
-            if (username) {
-                sendMessage();
-            } else {
-                setUsername();
-            }
+            sendMessage();
         }
     });
-
+    
     // Focus input when clicking on the message input's border
     $inputMessage.click(function () {
         $inputMessage.focus();
     });
-
+    
     // Socket events
-
+    
+    //willAddedNew Room
+    socket.on('added room', function (data) {
+        addRoom(data);
+    });
+    
     // Whenever the server emits 'login', log the login message
     socket.on('login', function (data) {
         connected = true;
@@ -144,23 +134,22 @@ $(function () {
         });
         addParticipantsMessage(data);
     });
-
+    
     socket.on('all rooms', function (data) {
-        var tempHtml=_.template($("#roomTemplate").html());
-        $('.conversation-wrap').append(tempHtml({rooms : data.allRooms}));
+        addRoom(data);
     });
-
+    
     // Whenever the server emits 'new message', update the chat body
     socket.on('new message', function (data) {
         addChatMessage(data);
     });
-
+    
     // Whenever the server emits 'user joined', log it in the chat body
     socket.on('user joined', function (data) {
         log(data.username + ' joined');
         addParticipantsMessage(data);
     });
-
+    
     // Whenever the server emits 'user left', log it in the chat body
     socket.on('user left', function (data) {
         log(data.username + ' left');

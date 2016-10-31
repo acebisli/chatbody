@@ -58,23 +58,23 @@ block content
              |  Send Message
 
            script(type='text/html',id='msgBody')
-                | <div class="media msg">
-                |       <a class="pull-left" href="#">
-                |       </a>
-                |       <div class="media-body">
-                |       <small class="pull-right time"><i class="fa fa-clock-o"></i> <%=obj.msgTime%></small>
-                |       <h5 class="media-heading"><%=obj.msgFrom%></h5>
-                |       <small class="col-lg-10"><%=obj.msgContent%></small>
-                |       </div>
-                |   </div>
+               |<div class="media msg">
+               |     <a class="pull-left" href="#">
+               |     </a>
+               |     <div class="media-body">
+               |         <small class="pull-right time"><i class="fa fa-clock-o"></i> <%=obj._messageTime%></small>
+               |         <h5 class="media-heading"><%=obj._user._userName%></h5>
+               |         <small class="col-lg-10"><%=obj._message%></small>
+               |     </div>
+               |</div>
            script(id='roomTemplate', type='text/template')
-                |<% _.forEach(obj.rooms,function(item){ %>
-                |<div class="media conversation">
-                |    <a class="pull-left" href="#">
-                |    </a>
-                |    <div class="media-body">
-                |        <h5 class="media-heading" roomId="<%=item._roomId%>"><%=item._roomName%></h5>
-                |        <small><%=item._roomDesc%></small>
-                |    </div>
-                |</div>
-                | <% }); %>
+               |<% _.forEach(obj.rooms,function(item){ %>
+               |   <div class="media conversation">
+               |       <a class="pull-left" href="#">
+               |       </a>
+               |       <div class="media-body">
+               |           <h5 class="media-heading" roomId="<%=item._roomId%>"><%=item._roomName%></h5>
+               |           <small><%=item._roomDesc%></small>
+               |       </div>
+               |   </div>
+               | <% }); %>
