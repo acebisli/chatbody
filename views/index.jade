@@ -3,3 +3,8 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  form(id="input_form", name="addEntry", method="post", action="/")
+    .row
+      .col-sm-3
+          input.form-control(type="text",placeholder="username",name="txtUserName")
+          button.form-control.btn.btn-primary(tyoe="submit",id="btnLogin",name="btnLogin",value="Odaya Giris")

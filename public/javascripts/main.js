@@ -35,13 +35,15 @@ $(function () {
     }
     
     function getUserName() {
-        var person = prompt("İsminizi Giriniz");
-        if (person != null && person != "") {
-            username = person;
-            return username;
-        } else {
-            getUserName();
-        }
+        //var person = prompt("İsminizi Giriniz");
+        //if (person != null && person != "") {
+        //    username = person;
+        //    return username;
+        //} else {
+        //    getUserName();
+        //}
+        
+        username = $("#hdnUserName").val();
     }
     
     

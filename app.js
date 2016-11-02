@@ -10,7 +10,7 @@ var SocketHelper = require('./core/connectionHelper/SocketHelper.js');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var chat = require('./routes/chat');
-
+var admin = require('./routes/admin.js');
 var app = express();
 
 // view engine setup
@@ -29,7 +29,8 @@ app.use(express.static('public'));
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/chat',chat);
+app.use('/chat', chat);
+app.use('/admin', admin);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

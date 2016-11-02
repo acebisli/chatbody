@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{f3fc26c7-06e3-4ed5-b45b-4c892a8fa597}</ProjectGuid>
     <ProjectHome />
-    <ProjectView>ShowAllFiles</ProjectView>
+    <ProjectView>ProjectFiles</ProjectView>
     <StartupFile>app.js</StartupFile>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -17,6 +17,62 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
     <Content Include="package.json" />
+    <Content Include="public\adminlte\css\AdminLTE.css" />
+    <Content Include="public\adminlte\css\AdminLTE.min.css" />
+    <Content Include="public\adminlte\css\skins\skin-black-light.css" />
+    <Content Include="public\adminlte\css\skins\skin-black-light.min.css" />
+    <Content Include="public\adminlte\css\skins\skin-black.css" />
+    <Content Include="public\adminlte\css\skins\skin-black.min.css" />
+    <Content Include="public\adminlte\css\skins\skin-blue-light.css" />
+    <Content Include="public\adminlte\css\skins\skin-blue-light.min.css" />
+    <Content Include="public\adminlte\css\skins\skin-blue.css" />
+    <Content Include="public\adminlte\css\skins\skin-blue.min.css" />
+    <Content Include="public\adminlte\css\skins\skin-green-light.css" />
+    <Content Include="public\adminlte\css\skins\skin-green-light.min.css" />
+    <Content Include="public\adminlte\css\skins\skin-green.css" />
+    <Content Include="public\adminlte\css\skins\skin-green.min.css" />
+    <Content Include="public\adminlte\css\skins\skin-purple-light.css" />
+    <Content Include="public\adminlte\css\skins\skin-purple-light.min.css" />
+    <Content Include="public\adminlte\css\skins\skin-purple.css" />
+    <Content Include="public\adminlte\css\skins\skin-purple.min.css" />
+    <Content Include="public\adminlte\css\skins\skin-red-light.css" />
+    <Content Include="public\adminlte\css\skins\skin-red-light.min.css" />
+    <Content Include="public\adminlte\css\skins\skin-red.css" />
+    <Content Include="public\adminlte\css\skins\skin-red.min.css" />
+    <Content Include="public\adminlte\css\skins\skin-yellow-light.css" />
+    <Content Include="public\adminlte\css\skins\skin-yellow-light.min.css" />
+    <Content Include="public\adminlte\css\skins\skin-yellow.css" />
+    <Content Include="public\adminlte\css\skins\skin-yellow.min.css" />
+    <Content Include="public\adminlte\css\skins\_all-skins.css" />
+    <Content Include="public\adminlte\css\skins\_all-skins.min.css" />
+    <Content Include="public\adminlte\img\avatar.png" />
+    <Content Include="public\adminlte\img\avatar04.png" />
+    <Content Include="public\adminlte\img\avatar2.png" />
+    <Content Include="public\adminlte\img\avatar3.png" />
+    <Content Include="public\adminlte\img\avatar5.png" />
+    <Content Include="public\adminlte\img\boxed-bg.jpg" />
+    <Content Include="public\adminlte\img\boxed-bg.png" />
+    <Content Include="public\adminlte\img\credit\american-express.png" />
+    <Content Include="public\adminlte\img\credit\cirrus.png" />
+    <Content Include="public\adminlte\img\credit\mastercard.png" />
+    <Content Include="public\adminlte\img\credit\mestro.png" />
+    <Content Include="public\adminlte\img\credit\paypal.png" />
+    <Content Include="public\adminlte\img\credit\paypal2.png" />
+    <Content Include="public\adminlte\img\credit\visa.png" />
+    <Content Include="public\adminlte\img\default-50x50.gif" />
+    <Content Include="public\adminlte\img\icons.png" />
+    <Content Include="public\adminlte\img\photo1.png" />
+    <Content Include="public\adminlte\img\photo2.png" />
+    <Content Include="public\adminlte\img\photo3.jpg" />
+    <Content Include="public\adminlte\img\photo4.jpg" />
+    <Content Include="public\adminlte\img\user1-128x128.jpg" />
+    <Content Include="public\adminlte\img\user2-160x160.jpg" />
+    <Content Include="public\adminlte\img\user3-128x128.jpg" />
+    <Content Include="public\adminlte\img\user4-128x128.jpg" />
+    <Content Include="public\adminlte\img\user5-128x128.jpg" />
+    <Content Include="public\adminlte\img\user6-128x128.jpg" />
+    <Content Include="public\adminlte\img\user7-128x128.jpg" />
+    <Content Include="public\adminlte\img\user8-128x128.jpg" />
     <Content Include="public\javascripts\bower_components\backbone\.bower.json" />
     <Content Include="public\javascripts\bower_components\backbone\backbone-min.map" />
     <Content Include="public\javascripts\bower_components\backbone\bower.json" />
@@ -151,6 +207,11 @@
     <Compile Include="core\models\ChatMessage.js" />
     <Compile Include="core\models\ChatRoom.js" />
     <Compile Include="core\models\ChatUser.js" />
+    <Compile Include="public\adminlte\js\app.js" />
+    <Compile Include="public\adminlte\js\app.min.js" />
+    <Compile Include="public\adminlte\js\demo.js" />
+    <Compile Include="public\adminlte\js\pages\dashboard.js" />
+    <Compile Include="public\adminlte\js\pages\dashboard2.js" />
     <Compile Include="public\javascripts\bower_components\backbone\backbone-min.js" />
     <Compile Include="public\javascripts\bower_components\backbone\backbone.js" />
     <Compile Include="public\javascripts\bower_components\bootstrap\dist\js\bootstrap.js" />
@@ -286,9 +347,12 @@
     <Compile Include="public\javascripts\bower_components\underscore\underscore-min.js" />
     <Compile Include="public\javascripts\bower_components\underscore\underscore.js" />
     <Compile Include="public\javascripts\main.js" />
+    <Compile Include="routes\admin.js" />
     <Compile Include="routes\chat.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\users.js" />
+    <Content Include="views\admin\index.jade" />
+    <Content Include="views\admin\adminlayout.jade" />
     <Content Include="views\chat.jade" />
     <Content Include="views\error.jade" />
     <Content Include="views\index.jade" />
@@ -301,6 +365,12 @@
     <Folder Include="core\connectionHelper\" />
     <Folder Include="core\models\" />
     <Folder Include="public" />
+    <Folder Include="public\adminlte\css\" />
+    <Folder Include="public\adminlte\css\skins\" />
+    <Folder Include="public\adminlte\img\" />
+    <Folder Include="public\adminlte\img\credit\" />
+    <Folder Include="public\adminlte\js\" />
+    <Folder Include="public\adminlte\js\pages\" />
     <Folder Include="public\javascripts\" />
     <Folder Include="public\javascripts\bower_components\" />
     <Folder Include="public\javascripts\bower_components\backbone\" />
@@ -341,9 +411,11 @@
     <Folder Include="public\javascripts\bower_components\jquery\src\traversing\var\" />
     <Folder Include="public\javascripts\bower_components\jquery\src\var\" />
     <Folder Include="public\javascripts\bower_components\underscore\" />
+    <Folder Include="public\adminlte\" />
     <Folder Include="public\stylesheets" />
     <Folder Include="routes" />
     <Folder Include="views" />
+    <Folder Include="views\admin\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <!--Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them.-->
