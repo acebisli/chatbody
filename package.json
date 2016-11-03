@@ -1,6 +1,9 @@
 {
   "name": "chatbody",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "description"  : "Chat Application with socket.",
+  "main"         : "server.js",
+  "author"       : "acebisli",
   "dependencies": {
     "body-parser": "~1.15.1",
     "cookie-parser": "~1.4.3",
